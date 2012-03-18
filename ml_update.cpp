@@ -4,7 +4,6 @@
 #include <sys/time.h>
 #include <jubatus/client/recommender_client.hpp>
 #include <jubatus/client/recommender_types.hpp>
-#include <pficommon/text/csv.h>
 
 using namespace std;
 using namespace jubatus;
@@ -25,7 +24,7 @@ int main(int argc, char* argv[]){
 
   ifstream ifs("./dat/ml-100k/u.data");
   if (!ifs){
-    throw string ("cannot open supervised labels");
+    throw string ("cannot open data file");
   }
 
   string userid, movieid, rating, mtime;
@@ -38,18 +37,6 @@ int main(int argc, char* argv[]){
     r.update_row(NAME, userid, d);
     n++;
   }
-
-  for (int i = 0 ; i< 100 ; i++)
-  {
-      similar_result sr = r.similar_row_from_id(NAME, pfi::lang::lexical_cast<string>(i), 10);
-      for (size_t i = 1; i < sr.size(); ++i){
-        cout <<  sr[i].first << ", ";
-      }
-      cout << endl;
-  }
-
-
-
 }
 
 
