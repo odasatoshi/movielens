@@ -13,9 +13,10 @@ int main(int argc, char* argv[]){
 
   recommender r("localhost", 9199, 1.0);
 
-  for (int i = 0 ; i< 1000 ; i++)
+  for (int i = 0 ; i< 943 ; i++)
   {
       similar_result sr = r.similar_row_from_id(NAME, pfi::lang::lexical_cast<string>(i), 10);
+        cout <<  "user " << i << " is similar to :";
       for (size_t i = 1; i < sr.size(); ++i){
         cout <<  sr[i].first << ", ";
       }
