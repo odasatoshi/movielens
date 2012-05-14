@@ -31,6 +31,7 @@ int main(int argc, char* argv[]){
   jubatus::datum d;
   int n = 0;
   while((ifs >> userid >> movieid >> rating >> mtime)!=0){
+    d.nv.clear();
     if (n % 1000 == 0)
        cout << n << endl;
     d.nv.push_back(make_pair(movieid, pfi::lang::lexical_cast<int>(rating)));
