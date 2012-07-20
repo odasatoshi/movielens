@@ -16,7 +16,7 @@ int main(int argc, char* argv[]){
 
   
   config_data config;
-  config.converter.num_rules.push_back((num_rule){"*", "num"});
+  config.converter = "{'key' : '*', 'type' : 'num'}";
   config.method = "lsh";
 
   recommender r("localhost", 9199, 1.0);
@@ -31,10 +31,10 @@ int main(int argc, char* argv[]){
   jubatus::datum d;
   int n = 0;
   while((ifs >> userid >> movieid >> rating >> mtime)!=0){
-    d.nv.clear();
+    d.num_values.clear();
     if (n % 1000 == 0)
        cout << n << endl;
-    d.nv.push_back(make_pair(movieid, pfi::lang::lexical_cast<int>(rating)));
+    d.num_values.push_back(make_pair(movieid, pfi::lang::lexical_cast<int>(rating)));
     r.update_row(NAME, userid, d);
     n++;
   }

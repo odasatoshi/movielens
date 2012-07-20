@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
+import sys, json
 from jubatus.recommender import client
 from jubatus.recommender import types
 
@@ -11,18 +11,18 @@ if __name__ == '__main__':
 
     recommender = client.recommender("127.0.0.1",9199)
 
-    str_fil_types = {}
-    str_fil_rules = []
-    num_fil_types = {}
-    num_fil_rules = []
-    str_type= {}
-    str_rules = []
-    num_type = {}
-    num_rules = [types.num_rule("*", "num")]
+    converter = {
+              "string_filter_types": {},
+              "string_filter_rules": [],
+                'num_filter_types': {},
+                'num_filter_rules': [],
+                'string_types': {},
+                'string_rules': [],
+                'num_types': {},
+                'num_rules': [{"key" : "*", "type" : "num"}]
+                }
 
-    converter = types.converter_config(str_fil_types, str_fil_rules, num_fil_types, num_fil_rules,
-                                       str_type, str_rules, num_type, num_rules)
-    config = types.config_data("lsh", converter)
+    config = types.config_data("lsh", json.dumps(converter))
     recommender.set_config(NAME, config)
 
     n = 0
