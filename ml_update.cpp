@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <time.h>
 #include <sys/time.h>
 #include <jubatus/client/recommender_client.hpp>
@@ -13,10 +14,15 @@ using namespace pfi::lang;
 const string NAME = "recommender_ml";
 
 int main(int argc, char* argv[]){
-
   
+  string convert;
+  ifstream ifc("config.json");
+  stringstream ss;
+  ss << ifc.rdbuf();
+
   config_data config;
-  config.converter = "{'key' : '*', 'type' : 'num'}";
+
+  config.converter = ss.str();
   config.method = "lsh";
 
   recommender r("localhost", 9199, 1.0);

@@ -11,18 +11,9 @@ if __name__ == '__main__':
 
     recommender = client.recommender("127.0.0.1",9199)
 
-    converter = {
-              "string_filter_types": {},
-              "string_filter_rules": [],
-                'num_filter_types': {},
-                'num_filter_rules': [],
-                'string_types': {},
-                'string_rules': [],
-                'num_types': {},
-                'num_rules': [{"key" : "*", "type" : "num"}]
-                }
+    converter = open('./config.json').read()
 
-    config = types.config_data("lsh", json.dumps(converter))
+    config = types.config_data("lsh", converter)
     recommender.set_config(NAME, config)
 
     n = 0
