@@ -9,6 +9,7 @@
  cd ..
  ./waf configure
  ./waf
+ jubarecommender -f config.json
  ./build/ml_update
  ./build/ml_analysis
 
