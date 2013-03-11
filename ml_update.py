@@ -11,11 +11,6 @@ if __name__ == '__main__':
 
     recommender = client.recommender("127.0.0.1",9199)
 
-    converter = open('./config.json').read()
-
-    config = types.config_data("lsh", converter)
-    recommender.set_config(NAME, config)
-
     n = 0
     for line in open('./dat/ml-100k/u.data'):
         userid, movieid, rating, mtime = line[:-1].split('\t')
